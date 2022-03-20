@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我是QG小组作业</title>
+</head>
+<body>
+        <!--<form action="/Demo01" method="post">
+          用户名:<input type="text" name="username"><br>
+          密码:<input type="password" name="password"><br>
+
+          <input type="submit" value="登录">
+        </form>-->
+
+        <form id="submit" action="/Demo01" method="get">
+            用户名:<input type="text" name="username"><br>
+            密码:<input type="password" name="password"><br>
+
+            <input type="submit" value="登录">
+        </form>
+
+        <form>
+            <input name="method" type="radio" value="get" onclick="updateMethod(this)">
+            Get
+            <br>
+            <input name="method" type="radio" value="post" onclick="updateMethod(this)">
+            Post
+            <br>
+            其他方法并不被支持哦
+        </form>
+</body>
+<script>
+    /**
+     * 更新 form 提交 method
+     * @param $e 当前点击的 radio
+     */
+    function updateMethod($e) {
+        // 根据元素 id 获取元素 #submit
+        let form = document.getElementById("submit");
+        // 设置表单的 method 属性 为 点击的 radio 的 value 属性
+        form.setAttribute("method", $e.getAttribute("value"));
+    }
+</script>
+</html>
