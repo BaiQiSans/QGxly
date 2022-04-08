@@ -2,12 +2,10 @@ package utils;
 
 import po.User;
 
-import javax.xml.namespace.QName;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 public class CRUDUtils {
     static JDBCUtils jdbcUtils = new JDBCUtils();
@@ -26,7 +24,7 @@ public class CRUDUtils {
 
     public boolean insert (User user){
         try {
-            String sql = "insert into user(id,name,password) values(" + user.getId() + "," + user.getUsername() + "," + user.getPassword() + ")";
+            String sql = "insert into user(name,password) values(" + user.getUsername() + "," + user.getPassword() + ")";
             System.out.println(sql);
             ps = conn.prepareStatement(sql);
             int result = ps.executeUpdate();
@@ -42,7 +40,7 @@ public class CRUDUtils {
     public boolean update(User user){
         int num=0;
         try {
-            String sql = "update user SET  id = "+user.getId()+",username = '"+user.getUsername()+"',password='"+user.getPassword()+"' where id ="+user.getId();//创建sql语句
+            String sql = "update user SET  id = "+user.getId()+",name = '"+user.getUsername()+"',password='"+user.getPassword()+"' where id ="+user.getId();//创建sql语句
             ps=conn.prepareStatement(sql);
             num=ps.executeUpdate();
             if(num!=0)
@@ -69,7 +67,7 @@ public class CRUDUtils {
 
 
     public ResultSet find (String str){
-        String sql = "select "+str+" from user";//创建sql语句
+            String sql = "select "+str+" from user";//创建sql语句
         try {
             ps=conn.prepareStatement(sql);
         } catch (SQLException throwables) {
@@ -82,7 +80,7 @@ public class CRUDUtils {
         }try {
             while (rs.next()){
                 System.out.print(rs.getString("id")+" ");
-                System.out.print(rs.getString("name")+" ");
+                System.out.print(rs.getString("username")+" ");
                 System.out.println(rs.getString("password"));
             }
         } catch (SQLException throwables) {
@@ -92,15 +90,14 @@ public class CRUDUtils {
         return rs;
     }
 
-    public static void main(String[] args) {
-        CRUDUtils crudUtils = new CRUDUtils();
-        ResultSet resultSet = crudUtils.find("*");
-//        System.out.println(crudUtils.delete(6));
- //       System.out.println(crudUtils.insert(new User(11, "555", "123")));
+//     public static void main(String[] args) {
+//         CRUDUtils crudUtils = new CRUDUtils();
+//         ResultSet resultSet = crudUtils.find("*");
+//         System.out.println(crudUtils.delete(6));
+//         System.out.println(crudUtils.update(new User(6, "555", "123")));
+//         System.out.println(crudUtils.insert(new User(6, "555", "123")));
 
-//        System.out.println(crudUtils.update(new User(6, "555", "123")));
 
-
-    }
+//     }
 
 }
